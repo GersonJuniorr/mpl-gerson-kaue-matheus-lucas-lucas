@@ -1,0 +1,16 @@
+escopo 0 global
+  ehPrimo|funcao|logico(inteiro)|1
+  principal|funcao|vazio()|15
+escopo 1 funcao ehPrimo pai 0
+  n|parametro|inteiro|1
+escopo 2 bloco pai 1
+  d|variavel|inteiro|5
+escopo 3 bloco pai 2
+escopo 4 bloco pai 2
+escopo 5 bloco pai 4
+escopo 6 funcao principal pai 0
+escopo 7 bloco pai 6
+  n|variavel|inteiro|16
+  achados|variavel|inteiro|17
+escopo 8 bloco pai 7
+escopo 9 bloco pai 8

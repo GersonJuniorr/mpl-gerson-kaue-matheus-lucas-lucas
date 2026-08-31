@@ -1,0 +1,12 @@
+escopo 0 global
+  fatorial|funcao|inteiro(inteiro)|1
+  principal|funcao|vazio()|9
+escopo 1 funcao fatorial pai 0
+  n|parametro|inteiro|1
+escopo 2 bloco pai 1
+escopo 3 bloco pai 2
+escopo 4 bloco pai 2
+escopo 5 funcao principal pai 0
+escopo 6 bloco pai 5
+  i|variavel|inteiro|10
+escopo 7 bloco pai 6

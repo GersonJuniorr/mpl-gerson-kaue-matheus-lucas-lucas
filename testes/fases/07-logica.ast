@@ -1,0 +1,38 @@
+programa
+  funcao marcar logico
+    parametros
+      parametro quem texto
+    bloco
+      escreva
+        variavel quem
+      retorne
+        literal logico verdadeiro
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao r logico
+        binario e
+          literal logico falso
+          chamada marcar
+            literal texto "direito avaliado"
+      escreva
+        variavel r
+      escreva
+        binario e
+          literal logico verdadeiro
+          literal logico verdadeiro
+      escreva
+        binario e
+          literal logico verdadeiro
+          literal logico falso
+      escreva
+        binario ou
+          literal logico falso
+          literal logico falso
+      escreva
+        unario nao
+          literal logico falso
+      escreva
+        unario nao
+          unario nao
+            literal logico verdadeiro

@@ -1,0 +1,9 @@
+escopo 0 global
+  marcar|funcao|logico(texto)|1
+  principal|funcao|vazio()|6
+escopo 1 funcao marcar pai 0
+  quem|parametro|texto|1
+escopo 2 bloco pai 1
+escopo 3 funcao principal pai 0
+escopo 4 bloco pai 3
+  r|variavel|logico|7

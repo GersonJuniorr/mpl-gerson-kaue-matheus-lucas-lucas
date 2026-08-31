@@ -1,0 +1,9 @@
+escopo 0 global
+  principal|funcao|vazio()|1
+escopo 1 funcao principal pai 0
+escopo 2 bloco pai 1
+  a|variavel|inteiro|2
+  b|variavel|inteiro|3
+  n|variavel|inteiro|4
+escopo 3 bloco pai 2
+  t|variavel|inteiro|7

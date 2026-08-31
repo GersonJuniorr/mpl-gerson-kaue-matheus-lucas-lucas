@@ -1,0 +1,35 @@
+programa
+  funcao juntar texto
+    parametros
+      parametro a texto
+      parametro b texto
+    bloco
+      retorne
+        binario +
+          binario +
+            variavel a
+            literal texto " "
+          variavel b
+  funcao principal vazio
+    parametros
+    bloco
+      escreva
+        chamada juntar
+          literal texto "bom"
+          literal texto "dia"
+      escreva
+        literal texto "com\ttab"
+      escreva
+        literal texto "com\"aspas\""
+      escreva
+        literal texto "barra\\invertida"
+      escreva
+        literal texto "duas\nlinhas"
+      escreva
+        literal texto ""
+      escreva
+        binario +
+          binario +
+            literal texto "a"
+            literal texto "b"
+          literal texto "c"

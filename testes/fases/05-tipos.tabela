@@ -1,0 +1,18 @@
+escopo 0 global
+  media|funcao|real(real,real)|1
+  principal|funcao|vazio()|5
+escopo 1 funcao media pai 0
+  a|parametro|real|1
+  b|parametro|real|1
+escopo 2 bloco pai 1
+escopo 3 funcao principal pai 0
+escopo 4 bloco pai 3
+  i|variavel|inteiro|6
+  r|variavel|real|7
+  l|variavel|logico|8
+  t|variavel|texto|9
+  convertido|variavel|real|15
+  semvalor|variavel|inteiro|17
+  semvalorr|variavel|real|18
+  semvalorl|variavel|logico|19
+  semvalort|variavel|texto|20

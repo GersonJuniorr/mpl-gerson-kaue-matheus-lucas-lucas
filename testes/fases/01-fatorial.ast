@@ -1,0 +1,37 @@
+programa
+  funcao fatorial inteiro
+    parametros
+      parametro n inteiro
+    bloco
+      se
+        binario <=
+          variavel n
+          literal inteiro 1
+        bloco
+          retorne
+            literal inteiro 1
+        bloco
+          retorne
+            binario *
+              variavel n
+              chamada fatorial
+                binario -
+                  variavel n
+                  literal inteiro 1
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao i inteiro
+        literal inteiro 1
+      enquanto
+        binario <=
+          variavel i
+          literal inteiro 6
+        bloco
+          escreva
+            chamada fatorial
+              variavel i
+          atribuicao i
+            binario +
+              variavel i
+              literal inteiro 1

@@ -1,0 +1,39 @@
+programa
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao a real
+        binario /
+          literal inteiro 7
+          literal inteiro 2
+      declaracao b real
+        binario /
+          literal real 7.000000
+          literal inteiro 2
+      escreva
+        variavel a
+      escreva
+        variavel b
+      escreva
+        binario /
+          literal inteiro 7
+          literal inteiro 2
+      escreva
+        binario /
+          unario -
+            literal inteiro 7
+          literal inteiro 2
+      escreva
+        binario %
+          literal inteiro 7
+          literal inteiro 3
+      escreva
+        binario %
+          unario -
+            literal inteiro 7
+          literal inteiro 3
+      escreva
+        binario %
+          literal inteiro 7
+          unario -
+            literal inteiro 3

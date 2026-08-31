@@ -1,0 +1,16 @@
+escopo 0 global
+  par|funcao|logico(inteiro)|1
+  impar|funcao|logico(inteiro)|8
+  principal|funcao|vazio()|15
+escopo 1 funcao par pai 0
+  n|parametro|inteiro|1
+escopo 2 bloco pai 1
+escopo 3 bloco pai 2
+escopo 4 funcao impar pai 0
+  n|parametro|inteiro|8
+escopo 5 bloco pai 4
+escopo 6 bloco pai 5
+escopo 7 funcao principal pai 0
+escopo 8 bloco pai 7
+  i|variavel|inteiro|16
+escopo 9 bloco pai 8

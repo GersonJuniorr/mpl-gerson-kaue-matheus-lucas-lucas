@@ -1,0 +1,62 @@
+programa
+  funcao ehPrimo logico
+    parametros
+      parametro n inteiro
+    bloco
+      se
+        binario <
+          variavel n
+          literal inteiro 2
+        bloco
+          retorne
+            literal logico falso
+      declaracao d inteiro
+        literal inteiro 2
+      enquanto
+        binario <=
+          binario *
+            variavel d
+            variavel d
+          variavel n
+        bloco
+          se
+            binario ==
+              binario %
+                variavel n
+                variavel d
+              literal inteiro 0
+            bloco
+              retorne
+                literal logico falso
+          atribuicao d
+            binario +
+              variavel d
+              literal inteiro 1
+      retorne
+        literal logico verdadeiro
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao n inteiro
+        literal inteiro 2
+      declaracao achados inteiro
+        literal inteiro 0
+      enquanto
+        binario <
+          variavel achados
+          literal inteiro 8
+        bloco
+          se
+            chamada ehPrimo
+              variavel n
+            bloco
+              escreva
+                variavel n
+              atribuicao achados
+                binario +
+                  variavel achados
+                  literal inteiro 1
+          atribuicao n
+            binario +
+              variavel n
+              literal inteiro 1

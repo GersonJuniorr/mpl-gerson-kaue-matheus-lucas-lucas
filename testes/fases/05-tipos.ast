@@ -1,0 +1,51 @@
+programa
+  funcao media real
+    parametros
+      parametro a real
+      parametro b real
+    bloco
+      retorne
+        binario /
+          binario +
+            variavel a
+            variavel b
+          literal real 2.000000
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao i inteiro
+        literal inteiro 42
+      declaracao r real
+        literal real 3.500000
+      declaracao l logico
+        literal logico verdadeiro
+      declaracao t texto
+        literal texto "oi"
+      escreva
+        variavel i
+      escreva
+        variavel r
+      escreva
+        variavel l
+      escreva
+        variavel t
+      escreva
+        chamada media
+          literal inteiro 1
+          literal inteiro 2
+      declaracao convertido real
+        variavel i
+      escreva
+        variavel convertido
+      declaracao semvalor inteiro
+      declaracao semvalorr real
+      declaracao semvalorl logico
+      declaracao semvalort texto
+      escreva
+        variavel semvalor
+      escreva
+        variavel semvalorr
+      escreva
+        variavel semvalorl
+      escreva
+        variavel semvalort

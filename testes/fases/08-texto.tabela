@@ -1,0 +1,9 @@
+escopo 0 global
+  juntar|funcao|texto(texto,texto)|1
+  principal|funcao|vazio()|5
+escopo 1 funcao juntar pai 0
+  a|parametro|texto|1
+  b|parametro|texto|1
+escopo 2 bloco pai 1
+escopo 3 funcao principal pai 0
+escopo 4 bloco pai 3

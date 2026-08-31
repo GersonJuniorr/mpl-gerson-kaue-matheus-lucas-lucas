@@ -1,0 +1,50 @@
+programa
+  funcao par logico
+    parametros
+      parametro n inteiro
+    bloco
+      se
+        binario ==
+          variavel n
+          literal inteiro 0
+        bloco
+          retorne
+            literal logico verdadeiro
+      retorne
+        chamada impar
+          binario -
+            variavel n
+            literal inteiro 1
+  funcao impar logico
+    parametros
+      parametro n inteiro
+    bloco
+      se
+        binario ==
+          variavel n
+          literal inteiro 0
+        bloco
+          retorne
+            literal logico falso
+      retorne
+        chamada par
+          binario -
+            variavel n
+            literal inteiro 1
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao i inteiro
+        literal inteiro 0
+      enquanto
+        binario <
+          variavel i
+          literal inteiro 5
+        bloco
+          escreva
+            chamada par
+              variavel i
+          atribuicao i
+            binario +
+              variavel i
+              literal inteiro 1

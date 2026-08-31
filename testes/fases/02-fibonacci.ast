@@ -1,0 +1,29 @@
+programa
+  funcao principal vazio
+    parametros
+    bloco
+      declaracao a inteiro
+        literal inteiro 0
+      declaracao b inteiro
+        literal inteiro 1
+      declaracao n inteiro
+        literal inteiro 10
+      enquanto
+        binario >
+          variavel n
+          literal inteiro 0
+        bloco
+          escreva
+            variavel a
+          declaracao t inteiro
+            binario +
+              variavel a
+              variavel b
+          atribuicao a
+            variavel b
+          atribuicao b
+            variavel t
+          atribuicao n
+            binario -
+              variavel n
+              literal inteiro 1
