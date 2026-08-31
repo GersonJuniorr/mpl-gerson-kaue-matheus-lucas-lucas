@@ -1,0 +1,5 @@
+#!/bin/sh
+# Compilador da MPL. Chame assim:
+#   ./compilar programa.mpl
+#   ./compilar --tokens programa.mpl
+exec python3 -m mplc.principal "$@"

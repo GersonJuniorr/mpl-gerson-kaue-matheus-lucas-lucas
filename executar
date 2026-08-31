@@ -1,0 +1,4 @@
+#!/bin/sh
+# Maquina virtual da MPL:
+#   ./executar programa.mplb
+exec python3 -m mplc.principal --rodar "$@"
