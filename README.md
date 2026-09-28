@@ -216,6 +216,77 @@ descrita em `CONTRATOS.md`, seção 7.
 
 ---
 
+## Gramática (BNF) da Entrega 2
+
+```bnf
+<programa> ::= <funcao> <programa> | ε
+
+<funcao> ::= "funcao" <tipo_retorno> ID "(" <parametros_opt> ")" <bloco>
+<tipo_retorno> ::= "inteiro" | "real" | "logico" | "texto" | "vazio"
+<tipo_variavel> ::= "inteiro" | "real" | "logico" | "texto"
+
+<parametros_opt> ::= <parametro> <mais_parametros> | ε
+<mais_parametros> ::= "," <parametro> <mais_parametros> | ε
+<parametro> ::= <tipo_variavel> ID
+
+<bloco> ::= "{" <comandos> "}"
+<comandos> ::= <comando> <comandos> | ε
+
+<comando> ::= <declaracao>
+            | <atribuicao_ou_chamada>
+            | <se>
+            | <enquanto>
+            | <escreva>
+            | <retorne>
+            | <bloco>
+
+<declaracao> ::= <tipo_variavel> ID <inicializacao_opt> ";"
+<inicializacao_opt> ::= "=" <expressao> | ε
+
+<atribuicao_ou_chamada> ::= ID "=" <expressao> ";"
+                          | ID "(" <argumentos_opt> ")" ";"
+
+<se> ::= "se" "(" <expressao> ")" <bloco> <senao_opt>
+<senao_opt> ::= "senao" <bloco> | ε
+
+<enquanto> ::= "enquanto" "(" <expressao> ")" <bloco>
+<escreva> ::= "escreva" "(" <expressao> ")" ";"
+<retorne> ::= "retorne" <expressao_opt> ";"
+<expressao_opt> ::= <expressao> | ε
+
+<argumentos_opt> ::= <expressao> <mais_argumentos> | ε
+<mais_argumentos> ::= "," <expressao> <mais_argumentos> | ε
+
+<expressao> ::= <ou>
+<ou> ::= <e> <ou_r>
+<ou_r> ::= "ou" <e> <ou_r> | ε
+<e> ::= <igualdade> <e_r>
+<e_r> ::= "e" <igualdade> <e_r> | ε
+<igualdade> ::= <relacional> <igualdade_r>
+<igualdade_r> ::= ("==" | "!=") <relacional> <igualdade_r> | ε
+<relacional> ::= <aditiva> <relacional_r>
+<relacional_r> ::= ("<" | "<=" | ">" | ">=") <aditiva> <relacional_r> | ε
+<aditiva> ::= <multiplicativa> <aditiva_r>
+<aditiva_r> ::= ("+" | "-") <multiplicativa> <aditiva_r> | ε
+<multiplicativa> ::= <unaria> <multiplicativa_r>
+<multiplicativa_r> ::= ("*" | "/" | "%") <unaria> <multiplicativa_r> | ε
+<unaria> ::= "nao" <unaria> | "-" <unaria> | <primaria>
+
+<primaria> ::= INTEIRO
+             | REAL
+             | LOGICO
+             | TEXTO
+             | ID
+             | ID "(" <argumentos_opt> ")"
+             | "(" <expressao> ")"
+```
+
+A precedência é codificada por uma função/produção por nível (`ou` até
+`primaria`) e os binários usam repetição à direita da produção (`<*_r>`),
+gerando associatividade à esquerda (`10 - 4 - 3` vira `(10 - 4) - 3`).
+
+---
+
 ## Como entregar
 
 1. `git push` no repositório do grupo.
