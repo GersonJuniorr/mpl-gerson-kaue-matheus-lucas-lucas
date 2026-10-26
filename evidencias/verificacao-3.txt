@@ -1,0 +1,73 @@
+
+══ Entrega 3 ══
+  ok   ./compilar existe e e executavel
+  ok   ./executar existe e e executavel
+  ok   --tokens de 01-fatorial
+  ok   --tokens de 02-fibonacci
+  ok   --tokens de 03-precedencia
+  ok   --tokens de 04-divisao
+  ok   --tokens de 05-tipos
+  ok   --tokens de 06-escopo
+  ok   --tokens de 07-logica
+  ok   --tokens de 08-texto
+  ok   --tokens de 09-mutua
+  ok   --tokens de 10-primos
+  ok   recusa lex-01-escape
+  ok   recusa lex-02-comentario
+  ok   recusa lex-03-ponto-depois
+  ok   recusa lex-04-ponto-antes
+  ok   recusa lex-05-texto-aberto
+  ok   recusa lex-06-caractere
+  ok   --tokens funciona apesar de erro de sintaxe
+  ok   a saida nao comeca com BOM
+  ok   --ast de 01-fatorial
+  ok   --ast de 02-fibonacci
+  ok   --ast de 03-precedencia
+  ok   --ast de 04-divisao
+  ok   --ast de 05-tipos
+  ok   --ast de 06-escopo
+  ok   --ast de 07-logica
+  ok   --ast de 08-texto
+  ok   --ast de 09-mutua
+  ok   --ast de 10-primos
+  ok   recusa sin-01-falta-pv
+  ok   recusa sin-02-falta-chave
+  ok   recusa sin-03-se-sem-par
+  ok   recusa sin-04-expr-incompleta
+  ok   recusa sin-05-chaves-obrigatorias
+  ok   recusa sin-06-sem-tipo-retorno
+  ok   --tabela de 01-fatorial
+  ok   --tabela de 02-fibonacci
+  ok   --tabela de 03-precedencia
+  ok   --tabela de 04-divisao
+  ok   --tabela de 05-tipos
+  ok   --tabela de 06-escopo
+  ok   --tabela de 07-logica
+  ok   --tabela de 08-texto
+  ok   --tabela de 09-mutua
+  ok   --tabela de 10-primos
+  ok   recusa sem-01-nao-declarada
+  ok   recusa sem-02-redeclaracao
+  ok   recusa sem-03-tipo-atribuicao
+  ok   recusa sem-04-condicao-nao-logica
+  ok   recusa sem-05-soma-texto-numero
+  ok   recusa sem-06-resto-real
+  ok   recusa sem-07-argumentos-demais
+  ok   recusa sem-08-funcao-inexistente
+  ok   recusa sem-09-caminho-sem-retorne
+  ok   recusa sem-10-vazio-em-expressao
+  ok   recusa sem-11-falta-principal
+  ok   recusa sem-12-retorne-em-vazio
+  ok   recusa sem-13-real-para-inteiro
+  ok   recusa sem-14-principal-com-parametro
+  ok   aceita 01-fatorial
+  ok   aceita 02-fibonacci
+  ok   aceita 03-precedencia
+  ok   aceita 04-divisao
+  ok   aceita 05-tipos
+  ok   aceita 06-escopo
+  ok   aceita 07-logica
+  ok   aceita 08-texto
+  ok   aceita 09-mutua
+  ok   aceita 10-primos
+Entrega 3: 70 de 70 passaram.
