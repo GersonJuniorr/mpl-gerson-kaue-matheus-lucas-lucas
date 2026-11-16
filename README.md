@@ -123,20 +123,8 @@ compiladores: *funciona aqui e não no clone*. Arquivo esquecido fora do commit,
 caminho absoluto, passo de compilação que ninguém roda. Vale para qualquer
 linguagem, e é a única prova que realmente antecipa a correção.
 
-Ele não lê o código de vocês. Ele roda o compilador e compara a saída com um
-corpus de **10 programas válidos**, **26 programas que precisam ser
-recusados na compilação** e **3 que precisam falhar na execução** — com a
-fase e a linha do erro conferidas.
-
-Os programas recusados são metade da nota escondida do trabalho. Um
-compilador que aceita tudo passa em todos os testes positivos e não vale
-nada: é por isso que o corpus tem mais programas errados do que certos.
-
-**A correção usa um segundo corpus, que vocês não têm.** Mesma linguagem,
-mesmas regras, programas diferentes. Um compilador de verdade passa nos dois
-sem que vocês precisem fazer nada; um programa que apenas reproduza as saídas
-esperadas deste corpus passa aqui e reprova lá. Estou dizendo isto abertamente
-para ninguém perder tempo pelo caminho errado.
+Ele não lê o código de vocês. Ele roda `./compilar` e `./executar` e compara o
+corpus de programas válidos e inválidos das quatro entregas.
 
 ## Escopos na Entrega 3
 
@@ -178,7 +166,7 @@ bate com a tabela abaixo, o tipo troca de `ID` para o da palavra.
 | `INTEIRO` | `[0-9]+` | |
 | `REAL` | `[0-9]+\.[0-9]+` | dígito obrigatório dos dois lados do `.`; `3.` e `.5` são erro léxico |
 | `LOGICO` | `verdadeiro\|falso` | tratado como palavra reservada acima |
-| `TEXTO` | `"([^"\\\n]\|\\[nt"\\])*"` | entre aspas, numa linha só; escapes aceitos: `\n` `\t` `\"` `\\` |
+| `TEXTO` | `"([^"\\\n\|\\[nt"\\])*"` | entre aspas, numa linha só; escapes aceitos: `\n` `\t` `\"` `\\` |
 
 ### Operadores e delimitadores
 
@@ -276,13 +264,8 @@ descrita em `CONTRATOS.md`, seção 7.
 <multiplicativa_r> ::= ("*" | "/" | "%") <unaria> <multiplicativa_r> | ε
 <unaria> ::= "nao" <unaria> | "-" <unaria> | <primaria>
 
-<primaria> ::= INTEIRO
-             | REAL
-             | LOGICO
-             | TEXTO
-             | ID
-             | ID "(" <argumentos_opt> ")"
-             | "(" <expressao> ")"
+<primaria> ::= INTEIRO | REAL | LOGICO | TEXTO | ID
+             | ID "(" <argumentos_opt> ")" | "(" <expressao> ")"
 ```
 
 A precedência é codificada por uma função/produção por nível (`ou` até
@@ -296,7 +279,29 @@ gerando associatividade à esquerda (`10 - 4 - 3` vira `(10 - 4) - 3`).
 1. `git push` no repositório do grupo.
 2. Abram a [página do trabalho](https://profluiz.mantovanitec.com/disciplinas/aulas/compiladores/trabalho.html).
 3. No formulário do fim da página: escolham a entrega, identifiquem os
-   integrantes (nome, RA e e-mail), colem a URL do repositório e anexem o
-   `evidencias/verificacao-N.txt`.
+integrantes (nome, RA e e-mail), colem a URL do repositório e anexem o
+`evidencias/verificacao-N.txt`.
 4. Cada integrante recebe uma cópia por e-mail. **Guardem esse e-mail**: é o
-   comprovante.
+comprovante.
+
+---
+
+## Instruções da VM (E4)
+
+O `.mplb` é texto UTF-8 no formato JSON Lines. Cada instrução abaixo descreve
+seu efeito sobre a pilha de operandos do registro de ativação atual.
+
+- `const valor`: empilha um literal.
+- `load local`: empilha o valor armazenado no local.
+- `store local`: desempilha e grava no local.
+- `cast_real`: desempilha um inteiro e empilha seu valor real equivalente.
+- `pop`: desempilha e descarta o topo.
+- `un operador`: desempilha um operando e empilha o resultado de `-` ou `nao`.
+- `bin operador`: desempilha direita e esquerda e empilha o resultado de um operador binário.
+- `jump_false rotulo`: desempilha uma condição e salta se ela for falsa.
+- `jump rotulo`: salta para um rótulo sem alterar a pilha.
+- `label rotulo`: marca um destino e não altera a pilha.
+- `call funcao quantidade`: desempilha os argumentos, cria um registro de ativação e empilha o retorno ao voltar.
+- `ret valor`: devolve o topo ao chamador; com `false`, retorna sem valor.
+- `print`: desempilha e escreve o valor formatado na saída.
+- `func` e `end`: delimitam uma função e não alteram a pilha.
