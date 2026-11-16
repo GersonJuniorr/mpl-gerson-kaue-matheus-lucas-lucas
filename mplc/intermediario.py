@@ -13,7 +13,7 @@ def _literal(rotulo):
 class _GeradorIR:
     def __init__(self):
         self.funcoes, self.f = [], None
-        self.escopos, self.tipos = [], {}
+        self.escopos, self.tipos, self.assinaturas = [], {}, {}
         self.local_id = self.label_id = 0
 
     def emit(self, op, *args, linha=0):
@@ -34,14 +34,17 @@ class _GeradorIR:
     def gerar(self, arvore):
         for no in arvore.filhos:
             _, nome, retorno = no.rotulo.split(' ', 2)
+            params = []
+            for p in no.filhos[0].filhos:
+                _, pn, pt = p.rotulo.split(' ', 2); params.append((pn, pt))
+            self.assinaturas[nome] = (retorno, params)
+        for no in arvore.filhos:
+            _, nome, retorno = no.rotulo.split(' ', 2)
             self.f = {'nome': nome, 'retorno': retorno, 'parametros': [], 'codigo': []}
             self.escopos, self.tipos = [{}], {}; self.local_id = 0
-            for p in no.filhos[0].filhos:
-                _, pn, pt = p.rotulo.split(' ', 2)
-                self.f['parametros'].append(self.local(pn, pt))
+            for pn, pt in self.assinaturas[nome][1]: self.f['parametros'].append(self.local(pn, pt))
             self.bloco(no.filhos[1], False)
-            if not self.f['codigo'] or self.f['codigo'][-1]['op'] != 'ret':
-                self.emit('ret', False, linha=no.linha)
+            if not self.f['codigo'] or self.f['codigo'][-1]['op'] != 'ret': self.emit('ret', False, linha=no.linha)
             self.funcoes.append(self.f)
         return {'versao': 1, 'funcoes': self.funcoes}
 
@@ -58,15 +61,12 @@ class _GeradorIR:
         if r.startswith('declaracao '):
             _, nome, tipo = r.split(' ', 2); local = self.local(nome, tipo)
             if no.filhos: self.expr(no.filhos[0])
-            else: self.emit('const', None, linha=no.linha)
+            else: self.emit('const', 0.0 if tipo == 'real' else (False if tipo == 'logico' else ('' if tipo == 'texto' else 0)), linha=no.linha)
             self.coerces(local, no.linha); self.emit('store', local, linha=no.linha)
         elif r.startswith('atribuicao '):
-            local = self.find(r.split(' ', 1)[1]); self.expr(no.filhos[0])
-            self.coerces(local, no.linha); self.emit('store', local, linha=no.linha)
-        elif r.startswith('chamada '):
-            self.call(no); self.emit('pop', linha=no.linha)
-        elif r == 'escreva':
-            self.expr(no.filhos[0]); self.emit('print', linha=no.linha)
+            local = self.find(r.split(' ', 1)[1]); self.expr(no.filhos[0]); self.coerces(local, no.linha); self.emit('store', local, linha=no.linha)
+        elif r.startswith('chamada '): self.call(no); self.emit('pop', linha=no.linha)
+        elif r == 'escreva': self.expr(no.filhos[0]); self.emit('print', linha=no.linha)
         elif r == 'retorne':
             if no.filhos:
                 self.expr(no.filhos[0])
@@ -74,31 +74,28 @@ class _GeradorIR:
                 self.emit('ret', True, linha=no.linha)
             else: self.emit('ret', False, linha=no.linha)
         elif r == 'se':
-            falso, fim = self.label(), self.label(); self.expr(no.filhos[0])
-            self.emit('jump_false', falso, linha=no.linha); self.bloco(no.filhos[1])
+            falso, fim = self.label(), self.label(); self.expr(no.filhos[0]); self.emit('jump_false', falso, linha=no.linha); self.bloco(no.filhos[1])
             if len(no.filhos) == 3:
-                self.emit('jump', fim, linha=no.linha); self.emit('label', falso, linha=no.linha)
-                self.bloco(no.filhos[2]); self.emit('label', fim, linha=no.linha)
+                self.emit('jump', fim, linha=no.linha); self.emit('label', falso, linha=no.linha); self.bloco(no.filhos[2]); self.emit('label', fim, linha=no.linha)
             else: self.emit('label', falso, linha=no.linha)
         elif r == 'enquanto':
-            inicio, fim = self.label(), self.label(); self.emit('label', inicio, linha=no.linha)
-            self.expr(no.filhos[0]); self.emit('jump_false', fim, linha=no.linha)
-            self.bloco(no.filhos[1]); self.emit('jump', inicio, linha=no.linha); self.emit('label', fim, linha=no.linha)
+            inicio, fim = self.label(), self.label(); self.emit('label', inicio, linha=no.linha); self.expr(no.filhos[0]); self.emit('jump_false', fim, linha=no.linha); self.bloco(no.filhos[1]); self.emit('jump', inicio, linha=no.linha); self.emit('label', fim, linha=no.linha)
         elif r == 'bloco': self.bloco(no)
 
     def call(self, no):
-        for a in no.filhos: self.expr(a)
-        self.emit('call', no.rotulo.split(' ', 1)[1], len(no.filhos), linha=no.linha)
+        nome = no.rotulo.split(' ', 1)[1]; params = self.assinaturas.get(nome, ('', []))[1]
+        for i, a in enumerate(no.filhos):
+            self.expr(a)
+            if i < len(params) and params[i][1] == 'real': self.emit('cast_real', linha=a.linha)
+        self.emit('call', nome, len(no.filhos), linha=no.linha)
 
     def expr(self, no):
         r = no.rotulo
         if r.startswith('literal '): self.emit('const', _literal(r), linha=no.linha)
         elif r.startswith('variavel '): self.emit('load', self.find(r.split(' ', 1)[1]), linha=no.linha)
         elif r.startswith('chamada '): self.call(no)
-        elif r.startswith('unario '):
-            self.expr(no.filhos[0]); self.emit('un', r.split(' ', 1)[1], linha=no.linha)
-        elif r.startswith('binario '):
-            self.expr(no.filhos[0]); self.expr(no.filhos[1]); self.emit('bin', r.split(' ', 1)[1], linha=no.linha)
+        elif r.startswith('unario '): self.expr(no.filhos[0]); self.emit('un', r.split(' ', 1)[1], linha=no.linha)
+        elif r.startswith('binario '): self.expr(no.filhos[0]); self.expr(no.filhos[1]); self.emit('bin', r.split(' ', 1)[1], linha=no.linha)
 
 
 def gerar(arvore, tabela): return _GeradorIR().gerar(arvore)
