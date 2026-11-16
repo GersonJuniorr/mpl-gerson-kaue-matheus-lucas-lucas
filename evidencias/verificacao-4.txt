@@ -1,3 +1,4 @@
+
 ══ Entrega 4 ══
   ok   ./compilar existe e e executavel
   ok   ./executar existe e e executavel
