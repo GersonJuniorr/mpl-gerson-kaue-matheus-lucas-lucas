@@ -1,15 +1,12 @@
-"""
-Entrega 4, segunda metade — geracao do codigo executavel.
-
-Traduz o codigo de tres enderecos para o formato que a VM de voces executa.
-O formato do .mplb e de voces, com uma exigencia: tem que ser TEXTO legivel.
-Na apresentacao a gente vai abrir um .mplb e ler junto.
-
-Leiam antes: CONTRATOS.md secao 6.
-"""
-from mplc.erros import NaoImplementado
+"""Geracao do .mplb textual: uma instrucao JSON por linha."""
+import json
 
 
 def gerar(codigo_intermediario):
-    """Devolve as linhas do arquivo .mplb."""
-    raise NaoImplementado('a geracao de codigo (Entrega 4)')
+    linhas = ['MPLB 1']
+    for funcao in codigo_intermediario['funcoes']:
+        linhas.append(json.dumps({'op': 'func', 'nome': funcao['nome'], 'retorno': funcao['retorno'], 'parametros': funcao['parametros']}, ensure_ascii=False))
+        for instrucao in funcao['codigo']:
+            linhas.append(json.dumps(instrucao, ensure_ascii=False))
+        linhas.append(json.dumps({'op': 'end'}, ensure_ascii=False))
+    return linhas
