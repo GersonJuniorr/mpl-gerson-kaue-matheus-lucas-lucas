@@ -32,9 +32,9 @@ def executar(texto_mplb, saida):
         elif atual is not None: atual['codigo'].append(obj)
     if 'principal' not in funcoes: raise ErroMPL('execucao', 1, 1, 'funcao principal ausente')
     for f in funcoes.values(): f['labels'] = {i['args'][0]: p for p, i in enumerate(f['codigo']) if i['op'] == 'label'}
-    frames = [{'funcao': funcoes['principal'], 'ip': 0, 'pilha': [], 'locais': {}}]
+    frames = [{'funcao': funcoes['principal'], 'ip': 0, 'pilha': [], 'locais': {}, 'linha_chamada': 1}]
     while frames:
-        if len(frames) > MAX_FRAMES: raise ErroMPL('execucao', 1, 1, 'estouro de pilha')
+        if len(frames) > MAX_FRAMES: raise ErroMPL('execucao', frames[-1]['linha_chamada'], 1, 'estouro de pilha')
         frame, codigo = frames[-1], frames[-1]['funcao']['codigo']
         if frame['ip'] >= len(codigo):
             frames.pop()
@@ -75,7 +75,7 @@ def executar(texto_mplb, saida):
             nome, quantidade = args; chamada = funcoes.get(nome)
             if chamada is None: raise ErroMPL('execucao', linha, 1, f'funcao {nome} ausente')
             valores = [pilha.pop() for _ in range(quantidade)][::-1]
-            frames.append({'funcao': chamada, 'ip': 0, 'pilha': [], 'locais': dict(zip(chamada['parametros'], valores))})
+            frames.append({'funcao': chamada, 'ip': 0, 'pilha': [], 'locais': dict(zip(chamada['parametros'], valores)), 'linha_chamada': linha})
         elif op == 'ret':
             valor = pilha.pop() if args[0] else None; frames.pop()
             if frames: frames[-1]['pilha'].append(valor)
