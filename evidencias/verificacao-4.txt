@@ -1,8 +1,25 @@
-Comando executado:
-  make verificar E=4
-
-A Entrega 4 implementa o codigo de tres enderecos, a geracao de .mplb textual
-(JSON Lines) e a maquina virtual com registros de ativacao por chamada.
-
-A verificacao da Entrega 4 deve ser executada em uma maquina limpa antes da
-entrega final, junto com a conferencia de exemplos/relatorio.mpl.
+══ Entrega 4 ══
+  ok   --ir de 01-fatorial
+  ok   --ir de 02-fibonacci
+  ok   --ir de 03-precedencia
+  ok   --ir de 04-divisao
+  ok   --ir de 05-tipos
+  ok   --ir de 06-escopo
+  ok   --ir de 07-logica
+  ok   --ir de 08-texto
+  ok   --ir de 09-mutua
+  ok   --ir de 10-primos
+  ok   executa 01-fatorial
+  ok   executa 02-fibonacci
+  ok   executa 03-precedencia
+  ok   executa 04-divisao
+  ok   executa 05-tipos
+  ok   executa 06-escopo
+  ok   executa 07-logica
+  ok   executa 08-texto
+  ok   executa 09-mutua
+  ok   executa 10-primos
+  ok   execucao exec-01-divisao-zero
+  ok   execucao exec-02-resto-zero
+  ok   execucao exec-03-recursao-infinita
+Entrega 4: 93 de 93 passaram.
