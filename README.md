@@ -130,6 +130,10 @@ corpus de programas válidos e inválidos das quatro entregas.
 
 Representamos os escopos como uma pilha de dicionários encadeados: cada escopo guarda seus símbolos locais e um ponteiro para o escopo pai. Essa estrutura facilita o sombreamento, porque a busca de nomes começa no escopo atual e sobe até encontrar a primeira declaração visível. Também ficou natural abrir escopos separados para parâmetros, bloco da função, `se` e `enquanto`, preservando a numeração exigida no `--tabela`. Na Entrega 4, esse encadeamento ajuda a mapear cada nome para posição de memória respeitando exatamente qual declaração está ativa em cada ponto do código.
 
+## Escopos na Entrega 3
+
+Representamos os escopos como uma pilha de dicionários encadeados: cada escopo guarda seus símbolos locais e um ponteiro para o escopo pai. Essa estrutura facilita o sombreamento, porque a busca de nomes começa no escopo atual e sobe até encontrar a primeira declaração visível. Também ficou natural abrir escopos separados para parâmetros, bloco da função, `se` e `enquanto`, preservando a numeração exigida no `--tabela`. Na Entrega 4, esse encadeamento ajuda a mapear cada nome para posição de memória respeitando exatamente qual declaração está ativa em cada ponto do código.
+
 ---
 
 ## Tabela de tokens (Entrega 1)
