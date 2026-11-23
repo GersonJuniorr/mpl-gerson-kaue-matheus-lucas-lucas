@@ -12,6 +12,8 @@ Tres coisas que costumam ser esquecidas e valem nota:
 
 Leiam antes: LINGUAGEM.md secoes 3 a 5, e CONTRATOS.md secao 4.
 """
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 
 from mplc.erros import ErroMPL
